@@ -1,10 +1,3 @@
-/**
- * Particle System Hook
- *
- * Manages particle geometry, materials, and shape morphing animations.
- * Handles transitions between different particle formations.
- */
-
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { ShapeType } from '@/types/shapes';
@@ -13,39 +6,13 @@ import { getSphereCoordinates, getScatterCoordinates } from '@/utils/geometry/sh
 import { getTextCoordinates } from '@/utils/geometry/textRenderer';
 import { lerpPositions, lerpColors } from '@/utils/math/interpolation';
 
-/**
- * Hook return value
- */
 interface UseParticleSystemResult {
-  /** Three.js Points object */
   particles: THREE.Points | null;
-  /** Current active shape */
   currentShape: ShapeType;
-  /** Function to change target shape */
   setTargetShape: (shape: ShapeType) => void;
-  /** Particle count */
   particleCount: number;
 }
 
-/**
- * Manages the particle system for hand-controlled morphing effects
- *
- * Creates and animates particles that morph between different shapes
- * based on hand gestures. Handles smooth transitions and color changes.
- *
- * @param scene - Three.js scene to add particles to
- * @param targetShape - The shape particles should morph towards
- * @returns Particle system controls and state
- *
- * @example
- * ```tsx
- * const { particles, currentShape, setTargetShape } = useParticleSystem(scene, 'sphere');
- * // Change shape based on gesture
- * useEffect(() => {
- *   setTargetShape(gestureShape);
- * }, [gestureShape]);
- * ```
- */
 export function useParticleSystem(
   scene: THREE.Scene | null,
   targetShape: string

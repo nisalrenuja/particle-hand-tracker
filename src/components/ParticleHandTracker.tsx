@@ -1,11 +1,3 @@
-/**
- * Particle Hand Tracker Component
- *
- * Main component that orchestrates hand tracking, gesture recognition,
- * and 3D particle visualization. Uses hooks and subcomponents for
- * clean separation of concerns.
- */
-
 'use client';
 
 import { useRef, useEffect } from 'react';
@@ -25,17 +17,6 @@ import { VideoFeed } from '@/components/VideoFeed';
 import { ThreeCanvas } from '@/components/ThreeCanvas';
 import { LANDMARK_INDICES, ANIMATION_CONFIG } from '@/config/constants';
 
-/**
- * ParticleHandTracker component
- *
- * Captures hand movements via webcam, recognizes gestures, and
- * displays reactive 3D particle effects that morph based on gestures.
- *
- * @example
- * ```tsx
- * <ParticleHandTracker />
- * ```
- */
 export default function ParticleHandTracker() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

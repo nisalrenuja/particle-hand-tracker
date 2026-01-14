@@ -1,47 +1,16 @@
-/**
- * Gesture Detection Hook
- *
- * Processes hand landmarks to detect gestures using the GestureRecognizer service.
- * Includes throttling to prevent excessive updates.
- */
-
 import { useMemo } from 'react';
 import type { HandLandmarks } from '@/types/mediapipe';
 import type { GestureResult } from '@/types/shapes';
 import { GestureRecognizer, mapGestureToShape } from '@/services/GestureRecognizer';
 import { useThrottle } from './useThrottle';
 
-/**
- * Hook return value
- */
 interface UseGestureDetectionResult {
-  /** The recognized gesture name */
   gesture: string;
-  /** Confidence score (0-1) */
   confidence: number;
-  /** The particle shape corresponding to this gesture */
   shape: string;
-  /** Display name for the gesture */
   displayName: string;
 }
 
-/**
- * Detects hand gestures from MediaPipe landmarks
- *
- * Uses the GestureRecognizer service to analyze hand positions and
- * determine the current gesture. Results are throttled to prevent
- * excessive re-renders.
- *
- * @param landmarks - Hand landmarks from MediaPipe (null if no hand detected)
- * @param throttleMs - Throttle delay in milliseconds (default: 100ms)
- * @returns Gesture detection results
- *
- * @example
- * ```tsx
- * const { gesture, shape, displayName } = useGestureDetection(landmarks);
- * console.log(`Detected: ${displayName}, Shape: ${shape}`);
- * ```
- */
 export function useGestureDetection(
   landmarks: HandLandmarks | null,
   throttleMs: number = 100
